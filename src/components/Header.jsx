@@ -1,11 +1,17 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Car, LogOut } from 'lucide-react';
+import { logoutUser } from '../utils/api';
 
 export default function Header() {
   const user = JSON.parse(localStorage.getItem('user') || 'null');
 
-  const handleLogout = () => {
+  const handleLogout = async () => {
+    try {
+      await logoutUser();
+    } catch (e) {
+      console.error(e);
+    }
     localStorage.removeItem('user');
     window.location.href = '/login';
   };
