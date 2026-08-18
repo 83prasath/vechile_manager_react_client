@@ -17,6 +17,7 @@ export default function Login() {
     try {
       const data = await loginUser(email, password);
       localStorage.setItem('user', JSON.stringify(data.user));
+      localStorage.setItem('token', data.token);
       // Force a full reload to /dashboard so the Header component picks up the new localStorage state
       window.location.href = '/dashboard';
     } catch (err) {
